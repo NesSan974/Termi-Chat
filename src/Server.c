@@ -1,7 +1,7 @@
 //------------------------------------------------
 // INCLUDES
 //------------------------------------------------
-#include <sys/socket.h>
+#include <sys/socket.h>=
 #include <arpa/inet.h>
 
 #include <stdlib.h>
@@ -63,8 +63,7 @@ int OnConnectedClient(void *data)
         memset(socketThreads->client_message, '\0', sizeof(socketThreads->client_message));
     }
 
-        printf("%d\n", GetLenghtList(allClient) );
-
+    printf("%d\n", GetLenghtList(allClient));
 
     printf("fin threads : %d\n", socketThreads->socketClient);
 
@@ -73,14 +72,11 @@ int OnConnectedClient(void *data)
 
     int sc = socketThreads->socketClient;
 
-    while (i < GetLenghtList(allClient)-1 && find != 1)
+    while (i < GetLenghtList(allClient) - 1 && find != 1)
     {
         i++;
 
         int a = *(int *)GetElemInList(allClient, i);
-
-        printf("socket a trouvé : %d, socket en cours : %d\n", sc, a);
-
         if (a == sc)
         {
             find = 1;
@@ -119,8 +115,8 @@ int main(void)
     // init sockaddr
     struct sockaddr_in addrServer;
     addrServer.sin_family = AF_INET;
-    // addrServer.sin_addr.s_addr = htonl(INADDR_ANY);
-    addrServer.sin_addr.s_addr = inet_addr("127.0.0.1");
+    addrServer.sin_addr.s_addr = htonl(INADDR_ANY);
+    // addrServer.sin_addr.s_addr = inet_addr("127.0.0.1");
 
     addrServer.sin_port = htons(PORT);
 
@@ -133,17 +129,24 @@ int main(void)
     }
 
     printf("server ON\n");
-    listen(socketServer, 5);
+    listen(socketServer, 10);
 
     int i = 0;
     while (1 == 1)
     {
-        struct SocketThreads *st = NULL;
+        struct SocketThreads *st;
 
-        socklen_t sizeClient = sizeof(st->addrClient);
+        socklen_t sizeClient = sizeof(struct sockaddr_in);
 
         // Accept est une boucle qui attend la co d'un client
         st->socketClient = accept(socketServer, (struct sockaddr *)&st->addrClient, &sizeClient);
+
+        if (st->socketClient < 0)
+        {
+            perror("accept() ");
+            exit(EXIT_FAILURE);
+        }
+
         printf("connexion du client %d\n", st->socketClient);
 
         if (thrd_create(&onConCl, OnConnectedClient, (void *)st) != thrd_success)

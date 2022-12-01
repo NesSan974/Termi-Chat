@@ -9,11 +9,11 @@ LIB=$(wildcard lib/*.o)
 
 #PHONY
 
-.PHONY: clean all server client
+.PHONY: clean all server client reset
 
 #ALIAS
 
-all:server client reset
+all:server client
 
 reset:clean server client
 server:bin/$(SERVER_BIN)

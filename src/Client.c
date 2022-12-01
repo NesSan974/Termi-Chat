@@ -32,7 +32,7 @@ int OnConnectedServer(void *data)
     }
 
     printf("server unreachable \n");
-    isExit = 1;
+    exit(EXIT_FAILURE);
 
     return thrd_success;
 }

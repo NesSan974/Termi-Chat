@@ -1,7 +1,7 @@
 #ifndef __STRUCT_H__
 #define __STRUCT_H__
 
-#define PORT 5064
+#define PORT 4612
 
 struct SocketThreads
 {
