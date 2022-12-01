@@ -10,6 +10,7 @@ Un make file a été créé afin de découvrir ce qu'est un makefile, et il est 
 git clone REPO
 make all
 ```
+Il suffit d'ouvrir un terminal avec un le serveur, et 2 autre qui lance le client.
 
 ## BUG
 Lorsqu'un client se deconnecte, le server crash  
