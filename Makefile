@@ -13,8 +13,9 @@ LIB=$(wildcard lib/*.o)
 
 #ALIAS
 
-all:server client
+all:server client reset
 
+reset:clean server client
 server:bin/$(SERVER_BIN)
 client:bin/$(CLIENT_BIN)
 
@@ -30,5 +31,4 @@ bin/$(CLIENT_BIN): src/Client.c include/struct.h
 
 
 clean:
-	rm -rf objs/*
 	rm -rf bin/*
