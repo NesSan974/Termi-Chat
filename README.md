@@ -12,14 +12,6 @@ make all
 ```
 Il suffit d'ouvrir un terminal avec un le serveur, et 2 autre qui lance le client.
 
-## BUG
-Lorsqu'un client se deconnecte, le server crash  
-solution possible :
-
-côté client : check si "shutdown()" coté client peut marcher. on intercepte le signal ctrl+C, et ont shutdown.
-côté server : 
-
-
 ## differentes sources de connaissances
 
 <https://www.youtube.com/@JacobSorber>  
