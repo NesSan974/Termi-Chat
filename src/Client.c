@@ -25,6 +25,7 @@ int OnConnectedServer(void *data)
         if ( recv(socketServer, server_message, sizeof(server_message), 0) <= 0 )
         {
             quit = 1;
+            continue;
         }
 
         printf("%s", server_message);

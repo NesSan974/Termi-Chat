@@ -16,7 +16,7 @@ Il suffit d'ouvrir un terminal avec un le serveur, et 2 autre qui lance le clien
 
 
 
-n'ayant pas mis de mutex, des soucis peuvent probalement arriver si des thresed veulent ecrir dans la list allClient  
+n'ayant pas mis de mutex, des soucis peuvent probalement arriver si des thread veulent ecrire dans la list allClient  
 notemment :  
 lorsque 2 clients se connecte en meme temps  
 Si il y'a une deconnexion et une connexion en même temps
@@ -26,7 +26,7 @@ lorsque 2 clients se déconnecte en meme temps
 ## TODO
 
 clean_up le code
-
+detecter le flag ctrl+c et shutdown tout les sockets de la liste.
 
 
 ## differentes sources de connaissances

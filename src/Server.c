@@ -38,8 +38,7 @@ int OnConnectedClient(void *data)
     struct SocketThreads *socketThreads = malloc(sizeof(struct SocketThreads));
     CURRENT_SOCKET_CLIENT = ((struct SocketThreads *)data)->socketClient;
 
-    allClient = AddtoList(allClient, 0, (void *)&CURRENT_SOCKET_CLIENT); // insere d'un int pointeur
-    // pb si 2client se connecte exactement en meme temps. Mais pour l'instant ça ira
+    allClient = AddtoList(allClient, 0, (void *)&CURRENT_SOCKET_CLIENT); 
 
     // Init message
     memset(socketThreads->server_message, '\0', sizeof(socketThreads->server_message));
@@ -96,11 +95,12 @@ int OnConnectedClient(void *data)
         exit(EXIT_FAILURE);
     }
 
+    shutdown(CURRENT_SOCKET_CLIENT, SHUT_RDWR);
+
     allClient = DeleteElemInList(allClient, find);
 
-    
-
     free(socketThreads);
+
 
     return thrd_success;
 }
