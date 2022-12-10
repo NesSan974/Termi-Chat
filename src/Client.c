@@ -10,7 +10,7 @@
 
 #include "../include/struct.h"
 
-int socketClient;
+int socketServer;
 char server_message[2000], client_message[2000];
 int isExit;
 
@@ -22,7 +22,7 @@ int OnConnectedServer(void *data)
     while (quit != 1)
     {
 
-        if ( recv(socketClient, server_message, sizeof(server_message), 0) <= 0 )
+        if ( recv(socketServer, server_message, sizeof(server_message), 0) <= 0 )
         {
             quit = 1;
         }
@@ -52,14 +52,14 @@ int main(void)
     // fgets(ipAddr, sizeof(client_message), stdin);
     // printf("\n");
 
-    socketClient = socket(AF_INET, SOCK_STREAM, 0);
+    socketServer = socket(AF_INET, SOCK_STREAM, 0);
 
     struct sockaddr_in addrClient;
     addrClient.sin_family = AF_INET;
     addrClient.sin_addr.s_addr = inet_addr("127.0.0.1");
     addrClient.sin_port = htons(PORT);
 
-    if (connect(socketClient, (const struct sockaddr *)&addrClient, sizeof(addrClient)) != 0)
+    if (connect(socketServer, (const struct sockaddr *)&addrClient, sizeof(addrClient)) != 0)
     {
         fprintf(stderr, "error while connecting.\n");
         exit(EXIT_FAILURE);
@@ -71,7 +71,7 @@ int main(void)
         exit(EXIT_FAILURE);
     }
 
-    // recv(socketClient, &server_message, sizeof(server_message), 0);
+    // recv(socketServer, &server_message, sizeof(server_message), 0);
 
     while (isExit != 1)
     {
@@ -80,7 +80,7 @@ int main(void)
 
         fgets(client_message, sizeof(client_message), stdin);
 
-        if ( send(socketClient, (void *)client_message, sizeof(client_message), 0) < 0)
+        if ( send(socketServer, (void *)client_message, sizeof(client_message), 0) < 0)
         {
             printf("an error occured when sending your message\n ");
         }

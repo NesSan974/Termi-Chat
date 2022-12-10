@@ -12,6 +12,23 @@ make all
 ```
 Il suffit d'ouvrir un terminal avec un le serveur, et 2 autre qui lance le client.
 
+## Les soucis
+
+
+
+n'ayant pas mis de mutex, des soucis peuvent probalement arriver si des thresed veulent ecrir dans la list allClient  
+notemment :  
+lorsque 2 clients se connecte en meme temps  
+Si il y'a une deconnexion et une connexion en même temps
+lorsque 2 clients se déconnecte en meme temps  
+
+
+## TODO
+
+clean_up le code
+
+
+
 ## differentes sources de connaissances
 
 <https://www.youtube.com/@JacobSorber>  

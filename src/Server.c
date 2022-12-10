@@ -1,7 +1,7 @@
 //------------------------------------------------
 // INCLUDES
 //------------------------------------------------
-#include <sys/socket.h>=
+#include <sys/socket.h>
 #include <arpa/inet.h>
 
 #include <stdlib.h>
@@ -12,6 +12,12 @@
 
 #include "../include/struct.h"
 #include "../include/List.h"
+
+//------------------------------------------------
+// PRECOMPIlATION
+//------------------------------------------------
+
+#define CURRENT_SOCKET_CLIENT socketThreads->socketClient
 
 //------------------------------------------------
 // GLOBALS
@@ -30,9 +36,10 @@ List *allClient;
 int OnConnectedClient(void *data)
 {
     struct SocketThreads *socketThreads = malloc(sizeof(struct SocketThreads));
-    socketThreads->socketClient = ((struct SocketThreads *)data)->socketClient;
+    CURRENT_SOCKET_CLIENT = ((struct SocketThreads *)data)->socketClient;
 
-    allClient = AddtoList(allClient, 0, (void *)&socketThreads->socketClient);
+    allClient = AddtoList(allClient, 0, (void *)&CURRENT_SOCKET_CLIENT); // insere d'un int pointeur
+    // pb si 2client se connecte exactement en meme temps. Mais pour l'instant ça ira
 
     // Init message
     memset(socketThreads->server_message, '\0', sizeof(socketThreads->server_message));
@@ -43,49 +50,56 @@ int OnConnectedClient(void *data)
     while (quit != 1)
     {
 
-        if (recv(socketThreads->socketClient, socketThreads->client_message, sizeof(socketThreads->client_message), 0) <= 0)
+        if (recv(CURRENT_SOCKET_CLIENT, socketThreads->client_message, sizeof(socketThreads->client_message), 0) <= 0)
         {
             quit = 1;
+            continue;
         }
 
         int i = 0;
         while (i < GetLenghtList(allClient))
         {
-            int a = *(int *)GetElemInList(allClient, i);
+            int socketClient_i = *(int *)GetElemInList(allClient, i);
 
-            if (socketThreads->socketClient != a)
+            if (CURRENT_SOCKET_CLIENT != socketClient_i)
             {
-                send(a, (void *)socketThreads->client_message, sizeof(socketThreads->client_message), 0);
+                send(socketClient_i, (void *)socketThreads->client_message, sizeof(socketThreads->client_message), 0);
             }
             i++;
         }
 
-        memset(socketThreads->client_message, '\0', sizeof(socketThreads->client_message));
+        memset(socketThreads->client_message, '\0', sizeof(socketThreads->client_message)); // a optimiser
     }
 
-    printf("%d\n", GetLenghtList(allClient));
+    printf("fin threads : %d\n", CURRENT_SOCKET_CLIENT);
 
-    printf("fin threads : %d\n", socketThreads->socketClient);
+    int i = 0;
+    int find = -1; // la var passera l'ID et stopera la boucle
+    fprintf(stderr, "----befor - lenght boucle : %d\n", GetLenghtList(allClient));
 
-    int i = -1;
-    int find = 0;
-
-    int sc = socketThreads->socketClient;
-
-    while (i < GetLenghtList(allClient) - 1 && find != 1)
+    while (i < GetLenghtList(allClient) && find == -1)
     {
+        int socketClient_i = *(int *)GetElemInList(allClient, i);
+
+        if (socketClient_i == CURRENT_SOCKET_CLIENT)
+        {
+            find = i;
+            fprintf(stderr, "find = %d\n", GetLenghtList(allClient));
+        }
+
         i++;
 
-        int a = *(int *)GetElemInList(allClient, i);
-        if (a == sc)
-        {
-            find = 1;
-        }
+    }
+    if (find == -1)
+    {
+        fprintf(stderr, "find = -1\n\n");
+        exit(EXIT_FAILURE);
     }
 
-    printf("end \n");
+    allClient = DeleteElemInList(allClient, find);
 
-    DeleteElemInList(allClient, i);
+    
+
     free(socketThreads);
 
     return thrd_success;
