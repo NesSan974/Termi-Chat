@@ -28,7 +28,7 @@ lorsque 2 clients se déconnecte en meme temps
 clean_up le code
 detecter le flag ctrl+c et shutdown tout les sockets de la liste.  
 
-##Long terme
+### Long terme
 
 creation de connexion securisé avec SSL.  
 Creation de liste d'amis  
