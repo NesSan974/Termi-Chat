@@ -42,5 +42,7 @@ creation de lobby
 <https://www.youtube.com/watch?v=VYPcmMo1sYk&ab_channel=DominiqueLiard>  
 
 ### SSL
+https://wiki.openssl.org/index.php/Simple_TLS_Server  
 https://stackoverflow.com/questions/7698488/turn-a-simple-socket-into-an-ssl-socket  
 https://aticleworld.com/ssl-server-client-using-openssl-in-c/    
+https://fm4dd.com/openssl/sslconnect.shtm  
