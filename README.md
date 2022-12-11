@@ -40,3 +40,7 @@ creation de lobby
 <https://www.youtube.com/@JacobSorber>  
 <https://www.youtube.com/@codingoverflow>  
 <https://www.youtube.com/watch?v=VYPcmMo1sYk&ab_channel=DominiqueLiard>  
+
+### SSL
+https://stackoverflow.com/questions/7698488/turn-a-simple-socket-into-an-ssl-socket  
+https://aticleworld.com/ssl-server-client-using-openssl-in-c/    
