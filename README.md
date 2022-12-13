@@ -46,3 +46,4 @@ https://wiki.openssl.org/index.php/Simple_TLS_Server
 https://stackoverflow.com/questions/7698488/turn-a-simple-socket-into-an-ssl-socket  
 https://aticleworld.com/ssl-server-client-using-openssl-in-c/    
 https://fm4dd.com/openssl/sslconnect.shtm  
+https://subscription.packtpub.com/book/cloud-and-networking/9781789349863/9/ch09lvl1sec90/openssl  
