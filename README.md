@@ -1,6 +1,7 @@
 # Termi-Chat
 
-Ce projet a pour but d'utiliser mes competences acquises en C,afin de pouvoir faire un chat sur le terminal, avec un server qui "gère" les messages, et les utilisateurs qui se connecte. 
+Ce projet a pour but d'utiliser mes competences acquises en C, afin de pouvoir faire un chat sur le terminal, avec un server qui "gère" les messages, et les utilisateurs qui se connecte. 
+Il y a donc de la gestion de socket, ainsi que des thread.
 
 ## Installation
 
