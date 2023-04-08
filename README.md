@@ -7,7 +7,7 @@ Ce projet a pour but d'utiliser mes competences acquises en C,afin de pouvoir fa
 Un make file a été créé afin de découvrir ce qu'est un makefile, et il est fonctionnel (normalement)
 
 ```bash
-git clone REPO
+git clone https://github.com/NesSan974/Termi-Chat.git
 make all
 ```
 Il suffit d'ouvrir un terminal avec un le serveur, et 2 autre qui lance le client.
